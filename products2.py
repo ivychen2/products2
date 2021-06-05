@@ -1,14 +1,20 @@
-# 讀取檔案
+import os # operating system
+
 products = []
-with open('products.csv', 'r') as f:
-#在檔案寫入時若採用encoding='utf-8'，但讀取時未加encoding='utf-8'，仍可正常讀取無誤
-#with open('products.csv', 'r', encoding='utf-8') as f:#加了encoding='utf-8'反而只讀的到欄位名，讀取不到資料
-    for line in f:
-        if '商品,價格' in line:
-            continue #底下第9、10行不執行，直接跳到下一回會的for迴圈
-        name, price = line.strip().split(',')
-        products.append([name, price])
-print(products)
+if os.path.isfile('products.csv'): # 檢查檔案在不在
+    print('yeah! 找到檔案了!')
+    # 讀取檔案
+    with open('products.csv', 'r') as f:
+    # 在檔案寫入時若採用encoding='utf-8'，但讀取時未加encoding='utf-8'，仍可正常讀取無誤
+    # with open('products.csv', 'r', encoding='utf-8') as f:#加了encoding='utf-8'反而只讀的到欄位名，讀取不到資料
+        for line in f:
+            if '商品,價格' in line:
+                continue # 底下第9、10行不執行，直接跳到下一回會的for迴圈
+            name, price = line.strip().split(',')
+            products.append([name, price])
+    print(products)
+else:
+    print('找不到檔案…')
 
 # 讓使用者輸入
 while True:
